@@ -1,0 +1,5 @@
+---
+# vars file for centos
+install_packages:
+  - git
+  - docker
