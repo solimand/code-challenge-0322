@@ -4,6 +4,8 @@
   yum:
     name: yum-utils
     state: present
+
+- name: Add Docker repository
   yum_repository:
     name: docker
     description: Docker Repo

@@ -1,16 +1,21 @@
 # Requirements 
 - **pyvmomi** via ```pip install```
 - [**Vagrant**](https://www.vagrantup.com/)
-- Ansible
-- Vagrant
+- Packages
+    - ansible
+    - vagrant
+    - libvirt
+    - virtualbox
 
 # Environment 
 - OS: _Arch Linux_
+- Role file tree - ```ansible-galaxy role init centos``` in the proj root
 
 # Installation
-- ```ansible-galaxy role init centos``` in the proj root
-- editing _default_ ansible files
-- ```python3 -m pip install molecule ansible-core```
-- ```molecule init scenario``` (in \<PROJDIR\>/roles/centos)
-- 
+- ```vagrant up```
 
+***
+# HowTo
+## Editing config
+- ```vagrant halt```
+- ```vagrant up --provision```
