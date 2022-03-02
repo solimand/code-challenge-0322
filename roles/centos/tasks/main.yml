@@ -1,9 +1,11 @@
 ---
 # tasks file for centos
 - name: Install required packages
-  package:
-    name: "{{ install_packages }}"
+  yum:
+    name: yum-utils
     state: present
-  become: yes
-  tags:
-    - install_packages
+  yum_repository:
+    name: docker
+    description: Docker Repo
+    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+
