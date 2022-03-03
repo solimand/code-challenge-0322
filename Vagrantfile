@@ -1,12 +1,18 @@
 Vagrant.configure("2") do |config|
     config.vm.box = "generic/centos7"
 
-    config.vm.provision "ansible_local" do |ansible|
+    config.vm.provision "centos1", type: "ansible_local" do |ansible|
         ansible.limit = 'all'
         ansible.inventory_path = 'hosts'
         ansible.playbook = 'local.yml'
     end
     
+    #config.vm.provision "centos2", type: "ansible_local" do |ansible|
+    #    ansible.limit = 'all'
+    #    ansible.inventory_path = 'hosts'
+    #    ansible.playbook = 'local.yml'
+    #end
+
     config.vm.synced_folder ".", "/vagrant"
 
     #config.vm.provision :serverspec do |spec|
