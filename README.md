@@ -11,11 +11,12 @@
 - OS: _Arch Linux_
 - Role file tree - ```ansible-galaxy role init centos``` in the proj root
 
-# Installation
-- ```vagrant up```
 
 ***
 # HowTo
+## Run demo
+- ```vagrant up```
+
 ## Editing config
 - ```vagrant halt```
 - ```vagrant up --provision```

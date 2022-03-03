@@ -2,12 +2,16 @@
 # tasks file for centos
 - name: Install required packages
   yum:
-    name: yum-utils
+    name: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
     state: present
+    update_cache: True
 
 - name: Add Docker repository
-  yum_repository:
-    name: docker
-    description: Docker Repo
-    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
-
+  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  become: yes
+  
+- name: Install Docker packages
+  yum:
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+    state: present
+    update_cache: True

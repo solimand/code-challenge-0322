@@ -1,9 +1,0 @@
-- name: Config CentOS/RHEL with Docker
-  hosts: localhost
-  gather_facts: yes
-  become: no
-
-  tasks:
-    - name: Config CentOS using roles
-      import_role:
-        name: centos
