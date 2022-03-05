@@ -21,3 +21,43 @@
     name: "docker"
     state: started
     enabled: yes
+
+- name: "Create systemd docker folder"
+  file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory 
+
+- name: "Enabling Engine API"
+  copy:
+    src: /vagrant/override.conf
+    dest: /etc/systemd/system/docker.service.d/override.conf
+
+- name: Just force systemd to reread configs
+  systemd:
+    daemon_reload: yes
+
+- name: Restart Docker service 
+  systemd:
+    state: restarted
+    name: docker
+
+# NOTE - this task cannot be used because I could not install ansible.posix collection with Vagrant - TO FIX
+#- name: Expose Docker Engine API port
+#  ansible.posix.firewalld:
+#    port: 2375/tcp
+#    zone: public
+#    permanent: yes
+#    state: enabled
+
+- name: Expose Docker Engine API port
+  become: yes
+  command: "{{item}}"
+  with_items:
+    - firewall-cmd --permanent --zone=public --add-port=2375/tcp
+    - firewall-cmd --reload
+
+
+- name: Reload firewalld service
+  systemd:
+    name: firewalld
+    state: reloaded
