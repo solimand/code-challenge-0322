@@ -4,6 +4,8 @@ This repository contains Vagrant-Ansible code to:
 - install docker inside them
 - enable service Docker
 - forward ports to use API Engine
+- execute travis CI (ansible-lint)
+- ...
 
 # Requirements 
 - **pyvmomi** via ```pip install```
@@ -41,4 +43,3 @@ This repository contains Vagrant-Ansible code to:
 
 - Install Docker Swarm
 - Molecule Tests
-- Travis - linting code
