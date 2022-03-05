@@ -4,3 +4,4 @@ install:
   - ansible-lint --version
 script:
   - ansible-lint .
+  
