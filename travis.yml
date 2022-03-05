@@ -1,6 +1,0 @@
-language: python
-install:
-  - pip install ansible ansible-lint
-  - ansible-lint --version
-script:
-  - ansible-lint .
