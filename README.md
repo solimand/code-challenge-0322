@@ -13,6 +13,7 @@ This repository contains Vagrant-Ansible code to:
     - vagrant
     - libvirt
     - virtualbox
+    - ansible-lint
 - Current IPv4 addresses of the VMs: 192.168.56.11/12 - Do not choose an IP that overlaps with any other IP space on your system. This can cause the network to not be reachable
 - Check Vagrantfile for forwarded ports. Avoid collisions with other localhost services
 
