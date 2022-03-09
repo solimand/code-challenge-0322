@@ -49,15 +49,23 @@
 #    permanent: yes
 #    state: enabled
 
-- name: Expose Docker Engine API port
+- name: Enable FirewallD
+  become: yes
+  systemd:
+    name: firewalld
+    state: started
+    enabled: true
+    masked: no
+
+- name: Open Docker Engine API port
   become: yes
   command: "{{item}}"
   with_items:
     - firewall-cmd --permanent --zone=public --add-port=2375/tcp
     - firewall-cmd --reload
 
-
 - name: Reload firewalld service
   systemd:
     name: firewalld
     state: reloaded
+

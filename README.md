@@ -1,16 +1,19 @@
-# Overview 
+# Code Challenge 
 This repository contains Vagrant-Ansible code to:
-- create two centos virtual machines
-- install docker inside them
-- enable service Docker
-- forward ports to use API Engine
-- execute travis CI (ansible-lint)
+- [Vagrant](https://www.vagrantup.com/) Create two centos 7 virtual machines
+- [Ansible](https://www.ansible.com/) Install Docker
+- Enable Docker service
+- Allow Docker Engine API on local network
+- [Travis](https://travis-ci.org/) Set travis ```ansible-lint``` in Continuous Integration
 - ...
 
-# Requirements 
-- **pyvmomi** via ```pip install```
-- [**Vagrant**](https://www.vagrantup.com/)
-- Packages
+## Requirements 
+- I used a Python virtual environment: ```python3 -m venv env```. I installed following packages:
+    - molecule
+    - ansible-core
+    - pyvmomi
+- [Vagrant]
+- OS Packages
     - ansible
     - vagrant
     - libvirt
@@ -19,22 +22,18 @@ This repository contains Vagrant-Ansible code to:
 - Current IPv4 addresses of the VMs: 192.168.56.11/12 - Do not choose an IP that overlaps with any other IP space on your system. This can cause the network to not be reachable
 - Check Vagrantfile for forwarded ports. Avoid collisions with other localhost services
 
-# Environment 
+## Environment 
 - OS: _Arch Linux_
-- Role file tree - ```ansible-galaxy role init centos``` in the proj root
-
+- Python3
 
 ***
-# HowTo
-## Run demo
+## HowTo
 - ```vagrant up```
-- set ports accordingly in Vagrantfile
+- set ports in Vagrantfile
     - ```curl -X GET "http://localhost:52375/containers/json?all=1"```
     - ```curl -X GET "http://localhost:52376/containers/json?all=1"```
 
-## Editing config
-- ```vagrant halt```
-- ```vagrant up --provision```
+In case you want to edit the vagrantfile, the suggested steps to restart the cluster are the following: ```vagrant halt``` > ```vagrant destroy``` > ```vagrant up --provision```
 
 # TODOs
 - Secure the API:
@@ -43,3 +42,4 @@ This repository contains Vagrant-Ansible code to:
 
 - Install Docker Swarm
 - Molecule Tests
+    - molecule init scenario -r centos [inside ansible role folder]

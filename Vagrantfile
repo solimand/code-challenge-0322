@@ -7,7 +7,8 @@ HOST2_PORT = 52376 # vm2 docker engine port forwarded on localhost
 Vagrant.configure("2") do |config|
 
     config.vm.define "centos_local_1" do |centos1|
-        centos1.vm.box = "generic/centos7"
+        centos1.vm.box = "centos/stream8"
+        centos1.vm.box_version = "20210210.0"
         centos1.vm.provision "ansible_local" do |ansible|
             ansible.limit = 'all'
             ansible.inventory_path = 'hosts'
@@ -21,7 +22,8 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "centos_local_2" do |centos2|
-        centos2.vm.box = "generic/centos7"
+        centos2.vm.box = "centos/stream8"
+        centos2.vm.box_version = "20210210.0"
         centos2.vm.provision "ansible_local" do |ansible|
             ansible.limit = 'all'
             ansible.inventory_path = 'hosts'
@@ -32,9 +34,5 @@ Vagrant.configure("2") do |config|
         centos2.vm.network "forwarded_port", guest: DOCKER_API_PORT, host: HOST2_PORT
     end
 
-    # TODO testing...
-    #config.vm.provision :serverspec do |spec|
-    #    spec.pattern = 'test/*_spec.rb' # pattern for spec files
-    #end
 end
 
