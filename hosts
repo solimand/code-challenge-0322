@@ -1,2 +1,8 @@
 [local]
 localhost              ansible_connection=local
+
+[main]
+192.168.56.11
+
+[workers]
+192.168.56.12
