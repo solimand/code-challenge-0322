@@ -94,8 +94,10 @@
     msg: "{{work_token}}"
 
 # Executed only on workers
-- name: Init Docker Swarm Worker
-  when: "'workers' in {{group_names}}"
-  become: yes
-  command: docker swarm join --token {{work_token}} 192.168.56.11:2377
+- hosts: workers
+  tasks:
+  - name: Allow access from 10.0.0.1
+    when: "'workers' in {{group_names}}"
+    become: yes
+    command: docker swarm join --token {{work_token}} 192.168.56.11:2377
 
