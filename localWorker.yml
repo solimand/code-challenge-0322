@@ -1,4 +1,4 @@
-- hosts: workers # main,workers #localhost
+- hosts: workers
   connection: local
   become: yes
   become_user: root

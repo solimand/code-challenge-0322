@@ -2,7 +2,7 @@
 localhost              ansible_connection=local
 
 [main]
-192.168.56.11
+192.168.56.11 work_token=abc
 
 [workers]
 192.168.56.12

@@ -1,10 +1,13 @@
-# Code Challenge 
-This repository contains Vagrant-Ansible code to:
+# Code Challenge Intro
+This repository contains Vagrant-Ansible code to automate centos and Docker Swarm provisioning.
+
+## Achievements
 - [Vagrant](https://www.vagrantup.com/) Create two centos 7 virtual machines
 - [Ansible](https://www.ansible.com/) Install Docker
 - Enable Docker service
 - Allow Docker Engine API on local network
 - [Travis](https://travis-ci.org/) Set travis ```ansible-lint``` in Continuous Integration
+- Create Docker Swarm Master node and set output variable accordingly to the worker token
 - ...
 
 ## Requirements 
@@ -36,10 +39,11 @@ This repository contains Vagrant-Ansible code to:
 In case you want to edit the vagrantfile, the suggested steps to restart the cluster are the following: ```vagrant halt``` > ```vagrant destroy``` > ```vagrant up --provision```
 
 # TODOs
-- Secure the API:
+- Secure the Dcoker API access:
     - TLS: https://docs.docker.com/engine/security/protect-access/#use-tls-https-to-protect-the-docker-daemon-socket
     - SSH: https://docs.docker.com/engine/security/protect-access/#use-ssh-to-protect-the-docker-daemon-socket
 
-- Install Docker Swarm
+- Join Docker Swarm Worker
+    - FIX ansible_vars global
+    - pass worker-token from docker swarm master to worker
 - Molecule Tests
-    - molecule init scenario -r centos [inside ansible role folder]

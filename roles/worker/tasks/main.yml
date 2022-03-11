@@ -1,6 +1,9 @@
 ---
 # tasks file for worker
-# - name: docker joining
-#   when: "'workers' in {{group_names}}"
-#   become: yes
-#   command: docker swarm join --token {{work_token}} 192.168.56.11:2377
+- name: docker joining
+  become: yes
+  command: docker swarm join --token {{ hostvars[groups['workers'][0]]['ansible_fact']['work_token'] }} 192.168.56.11:2377
+  register: command_out
+
+- debug: 
+    msg: "{{command_out.stdout}}"
