@@ -9,29 +9,31 @@ Vagrant.configure("2") do |config|
     config.vm.define "centos_local_1" do |centos1|
         centos1.vm.box = "centos/stream8"
         centos1.vm.box_version = "20210210.0"
+        centos1.vm.synced_folder ".", "/vagrant"
+        centos1.vm.network "private_network", ip: HOST1_IP
+        centos1.vm.network "forwarded_port", guest: DOCKER_API_PORT, host: HOST1_PORT
+
         centos1.vm.provision "ansible_local" do |ansible|
             ansible.limit = 'all'
             ansible.inventory_path = 'hosts'
             #ansible.galaxy_command = "ansible-galaxy collection install ansible.posix"
             #ansible.galaxy_role_file = 'requirements.yml'
-            ansible.playbook = 'local.yml'
+            ansible.playbook = 'localMain.yml'
         end
-        centos1.vm.synced_folder ".", "/vagrant"
-        centos1.vm.network "private_network", ip: HOST1_IP
-        centos1.vm.network "forwarded_port", guest: DOCKER_API_PORT, host: HOST1_PORT
     end
 
     config.vm.define "centos_local_2" do |centos2|
         centos2.vm.box = "centos/stream8"
         centos2.vm.box_version = "20210210.0"
-        centos2.vm.provision "ansible_local" do |ansible|
-            ansible.limit = 'all'
-            ansible.inventory_path = 'hosts'
-            ansible.playbook = 'local.yml'
-        end
         centos2.vm.synced_folder ".", "/vagrant"
         centos2.vm.network "private_network", ip: HOST2_IP
         centos2.vm.network "forwarded_port", guest: DOCKER_API_PORT, host: HOST2_PORT
+        
+        centos2.vm.provision "ansible_local" do |ansible|
+            ansible.limit = 'all'
+            ansible.inventory_path = 'hosts'
+            ansible.playbook = 'localWorker.yml'
+        end
     end
 
 end

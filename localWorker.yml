@@ -1,0 +1,8 @@
+- hosts: workers # main,workers #localhost
+  connection: local
+  become: yes
+  become_user: root
+  roles:
+    - centos
+    - worker
+    

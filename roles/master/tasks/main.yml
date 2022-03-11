@@ -1,0 +1,18 @@
+---
+# tasks file for master
+- name: Init Docker Swarm Master
+  when: "'main' in {{group_names}}" # fix here
+  become: yes
+  command: docker swarm init --advertise-addr 192.168.56.11
+  
+- name: Get Workers Token
+  when: "'main' in {{group_names}}"
+  become: yes
+  command: docker swarm join-token worker -q
+  register: command_output
+
+- set_fact:
+    work_token: "{{ command_output.stdout }}"
+
+- debug: 
+    msg: "{{work_token}}"

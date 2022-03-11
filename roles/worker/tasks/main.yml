@@ -1,0 +1,6 @@
+---
+# tasks file for worker
+# - name: docker joining
+#   when: "'workers' in {{group_names}}"
+#   become: yes
+#   command: docker swarm join --token {{work_token}} 192.168.56.11:2377
